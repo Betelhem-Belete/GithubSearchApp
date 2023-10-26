@@ -1,2 +1,2 @@
 # GithubSearchApp
-vanilla js for search a user in github
+vanilla js to search a user in github
