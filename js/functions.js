@@ -5,7 +5,7 @@ export async function getUser(username){
     const response = await fetch(v.apiURL + username);
     const data = await response.json();
 
-    console.log(data);
+    // console.log(data);
     if (!response.ok){
         errorMessage("User not found, try another");
     } else {
@@ -14,6 +14,18 @@ export async function getUser(username){
     }
 }
 
+//Get Repositories
+
+async function getRepos(username){
+    const response = await fetch(v.apiURL + username + "/repos");
+    const data = await response.json();
+
+    console.log(data);
+    displayRepos(data);
+    
+}
+
+// Error message function
 export function errorMessage(msg){
     v.profile.innerHTML = "";
     document.querySelector(".hide").style.display = "none";
@@ -36,4 +48,22 @@ export function displayData(user){
         <p><i class="fas fa-marker-alt"></i>${user.location}</p>
         `;
         v.profile.innerHTML = html;
+}
+
+// Display repo
+function displayRepos(repoData){
+    let repo_data = repoData.map((repo) => {
+        return `
+            <span class="repo border border-rounded p3">
+                <a href="${repo.html_url}" target="_blank" 
+                rel="noopener">Responsive Websites</a>
+                <p>
+                    <strong>Stars: ${repo.stargazers_count} |</strong>
+                    <strong>Watchers: ${repo.swatchers_count} |</strong>
+                    <strong>Forks: ${repo.forks_count} |</strong>
+                </p>
+            </span>
+     `;
+    })
+    v.repos.innerHTML = repo_data;
 }
