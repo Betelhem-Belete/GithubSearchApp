@@ -14,3 +14,9 @@
   padding: 0px;
   box-sizing: border-box;
 }
+.repos{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(25rem, 1fr));
+    row-gap: 2rem;
+    column-gap: 2rem;
+}
